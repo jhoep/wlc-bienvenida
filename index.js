@@ -33,7 +33,7 @@ const client = new Client({
 const TOKEN = process.env.TOKEN;
 
 // 🔹 PON AQUÍ EL ID DEL CANAL DE BIENVENIDA
-const WELCOME_CHANNEL_ID = "1475262242118307841";
+const WELCOME_CHANNEL_ID = "1475262242118307841L";
 
 client.once('ready', () => {
   console.log(`✅ Bot listo como ${client.user.tag}`);
@@ -46,12 +46,12 @@ client.on('guildMemberAdd', async (member) => {
 
   const embed = new EmbedBuilder()
     .setColor('#111318')
-    .setTitle('ʚ Welcome ɞ')
     .setDescription(`
 ╭┈┈┈┈୨♡୧┈┈┈┈╮
+✦ ʚ WELCOME ɞ ✦
 ╰┈┈┈┈୨♡୧┈┈┈┈╯
 
-🌷 Hola ${member}
+  WELCOME1 ${member}
 
 Bienvenido/a a **${member.guild.name}**
 Ahora somos ✧ ${member.guild.memberCount} ✧ miembros
