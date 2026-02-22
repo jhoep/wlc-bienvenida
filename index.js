@@ -4,6 +4,25 @@ const {
   EmbedBuilder 
 } = require('discord.js');
 
+const express = require('express');
+const app = express();
+
+// ===============================
+// 🌐 WEB SERVICE PARA RENDER 24/7
+// ===============================
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+  res.send('Bot activo 24/7 🚀');
+});
+
+app.listen(PORT, () => {
+  console.log(`🌐 Web service activo en puerto ${PORT}`);
+});
+
+// ===============================
+// 🤖 CONFIGURACIÓN DEL BOT
+// ===============================
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -11,10 +30,9 @@ const client = new Client({
   ]
 });
 
-// 🔑 TU TOKEN
 const TOKEN = process.env.TOKEN;
 
-// 📌 ID DEL CANAL DONDE SE ENVÍA LA BIENVENIDA
+// 🔹 PON AQUÍ EL ID DEL CANAL DE BIENVENIDA
 const WELCOME_CHANNEL_ID = "1475262242118307841";
 
 client.once('ready', () => {
@@ -44,7 +62,7 @@ Ahora somos ✧ ${member.guild.memberCount} ✧ miembros
 ♡ disfruta tu estadía ♡
     `)
     .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
-    .setFooter({ text: 'made with love ✨' })
+    .setImage('https://i.imgur.com/Ucx2IKo.png')
     .setTimestamp();
 
   channel.send({ embeds: [embed] });
