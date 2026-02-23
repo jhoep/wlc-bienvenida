@@ -43,13 +43,9 @@ client.on('guildMemberAdd', async (member) => {
   const embed = new EmbedBuilder()
     .setColor('#111318')
     .setDescription(`
-\`\`\`
-　　　─── ･ ｡ﾟ☆ ･ ───
-\`\`\`
-**✦ ʚ WELCOME ɞ ✦**
-\`\`\`
-　　　─── ･ ｡ﾟ☆ ･ ───
-\`\`\`
+╭┈┈┈┈୨♡୧┈┈┈┈╮
+✦ ʚ WELCOME ɞ ✦
+╰┈┈┈┈୨♡୧┈┈┈┈╯
 > ¡Hola! ${member}
 > Bienvenido/a a **${member.guild.name}**
 > Ahora somos ✧ **${member.guild.memberCount}** ✧ miembros
@@ -67,3 +63,4 @@ client.on('guildMemberAdd', async (member) => {
 });
 
 client.login(TOKEN);
+
