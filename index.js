@@ -29,13 +29,17 @@ const client = new Client({
 
 const TOKEN = process.env.TOKEN;
 
-// 🔹 ID DEL CANAL DE BIENVENIDA
+// 🔹 CANALES
 const WELCOME_CHANNEL_ID = "1475262242118307841";
+const BOOST_LOG_CHANNEL_ID = "1466283028178276526";
 
 client.once('ready', () => {
   console.log(`✅ Bot listo como ${client.user.tag}`);
 });
 
+// ===============================
+// 👋 BIENVENIDA
+// ===============================
 client.on('guildMemberAdd', async (member) => {
   const channel = member.guild.channels.cache.get(WELCOME_CHANNEL_ID);
   if (!channel) return;
@@ -49,10 +53,8 @@ client.on('guildMemberAdd', async (member) => {
 > ¡Hola! ${member}
 > Bienvenido/a a **${member.guild.name}**
 > Ahora somos ✧ **${member.guild.memberCount}** ✧ miembros
-
 📜 ︴<#1466283027050135706>
 ✅ ︴<#1475247150043631768>
-
 **♡ disfruta tu estadía ♡**
     `)
     .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
@@ -62,5 +64,65 @@ client.on('guildMemberAdd', async (member) => {
   channel.send({ embeds: [embed] });
 });
 
-client.login(TOKEN);
+// ===============================
+// 💜 LOGS DE BOOST
+// ===============================
+client.on('guildMemberUpdate', async (oldMember, newMember) => {
+  const logChannel = newMember.guild.channels.cache.get(BOOST_LOG_CHANNEL_ID);
+  if (!logChannel) return;
 
+  const wasBosting = oldMember.premiumSince;
+  const isBosting = newMember.premiumSince;
+
+  // Empezó a boostear
+  if (!wasBosting && isBosting) {
+    const totalBoosts = newMember.guild.premiumSubscriptionCount;
+    const boostTier = newMember.guild.premiumTier;
+
+    const embed = new EmbedBuilder()
+      .setColor('#f47fff')
+      .setAuthor({
+        name: newMember.user.tag,
+        iconURL: newMember.user.displayAvatarURL({ dynamic: true })
+      })
+      .setDescription(`
+╭┈┈┈┈୨♡୧┈┈┈┈╮
+✦ ʚ BOOST ɞ ✦
+╰┈┈┈┈୨♡୧┈┈┈┈╯
+> 💜 ${newMember} acaba de boostear el servidor!
+> ✨ Gracias por apoyar **${newMember.guild.name}**
+> 🚀 Boosts totales: **${totalBoosts}**
+> 🏆 Nivel actual: **${boostTier}**
+**♡ gracias por tu apoyo ♡**
+      `)
+      .setThumbnail(newMember.user.displayAvatarURL({ dynamic: true }))
+      .setTimestamp();
+
+    logChannel.send({ embeds: [embed] });
+  }
+
+  // Dejó de boostear
+  if (wasBosting && !isBosting) {
+    const totalBoosts = newMember.guild.premiumSubscriptionCount;
+
+    const embed = new EmbedBuilder()
+      .setColor('#111318')
+      .setAuthor({
+        name: newMember.user.tag,
+        iconURL: newMember.user.displayAvatarURL({ dynamic: true })
+      })
+      .setDescription(`
+╭┈┈┈┈୨♡୧┈┈┈┈╮
+✦ ʚ BOOST REMOVED ɞ ✦
+╰┈┈┈┈୨♡୧┈┈┈┈╯
+> 🩶 ${newMember} retiró su boost del servidor.
+> 💔 Boosts totales: **${totalBoosts}**
+      `)
+      .setThumbnail(newMember.user.displayAvatarURL({ dynamic: true }))
+      .setTimestamp();
+
+    logChannel.send({ embeds: [embed] });
+  }
+});
+
+client.login(TOKEN);
