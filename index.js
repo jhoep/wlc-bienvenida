@@ -44,7 +44,7 @@ client.on('guildMemberAdd', async (member) => {
     .setColor('#111318')
     .setDescription(`
 ╭┈┈┈┈୨♡୧┈┈┈┈╮
-  ✦ ʚ WELCOME ɞ ✦
+       ✦ ʚ WELCOME ɞ ✦
 ╰┈┈┈┈୨♡୧┈┈┈┈╯
 
 ¡Hola! ${member}
@@ -64,4 +64,5 @@ Ahora somos ✧ ${member.guild.memberCount} ✧ miembros
 });
 
 client.login(TOKEN);
+
 
