@@ -43,18 +43,21 @@ client.on('guildMemberAdd', async (member) => {
   const embed = new EmbedBuilder()
     .setColor('#111318')
     .setDescription(`
-╭┈┈┈┈୨♡୧┈┈┈┈╮
-       ✦ ʚ WELCOME ɞ ✦
-╰┈┈┈┈୨♡୧┈┈┈┈╯
-
-¡Hola! ${member}
-Bienvenido/a a **${member.guild.name}**
-Ahora somos ✧ ${member.guild.memberCount} ✧ miembros
+\`\`\`
+　　　─── ･ ｡ﾟ☆ ･ ───
+\`\`\`
+**✦ ʚ WELCOME ɞ ✦**
+\`\`\`
+　　　─── ･ ｡ﾟ☆ ･ ───
+\`\`\`
+> ¡Hola! ${member}
+> Bienvenido/a a **${member.guild.name}**
+> Ahora somos ✧ **${member.guild.memberCount}** ✧ miembros
 
 📜 ︴<#1466283027050135706>
 ✅ ︴<#1475247150043631768>
 
-♡ disfruta tu estadía ♡
+**♡ disfruta tu estadía ♡**
     `)
     .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
     .setImage('https://i.imgur.com/Ucx2IKo.png')
@@ -64,5 +67,3 @@ Ahora somos ✧ ${member.guild.memberCount} ✧ miembros
 });
 
 client.login(TOKEN);
-
-
