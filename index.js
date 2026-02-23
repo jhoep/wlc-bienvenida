@@ -3,7 +3,6 @@ const {
   GatewayIntentBits, 
   EmbedBuilder 
 } = require('discord.js');
-
 const express = require('express');
 const app = express();
 
@@ -11,11 +10,9 @@ const app = express();
 // 🌐 WEB SERVICE PARA RENDER 24/7
 // ===============================
 const PORT = process.env.PORT || 3000;
-
 app.get('/', (req, res) => {
   res.send('Bot activo 24/7 🚀');
 });
-
 app.listen(PORT, () => {
   console.log(`🌐 Web service activo en puerto ${PORT}`);
 });
@@ -32,15 +29,14 @@ const client = new Client({
 
 const TOKEN = process.env.TOKEN;
 
-// 🔹 PON AQUÍ EL ID DEL CANAL DE BIENVENIDA
-const WELCOME_CHANNEL_ID = "1475262242118307841L";
+// 🔹 ID DEL CANAL DE BIENVENIDA
+const WELCOME_CHANNEL_ID = "1475262242118307841";
 
 client.once('ready', () => {
   console.log(`✅ Bot listo como ${client.user.tag}`);
 });
 
 client.on('guildMemberAdd', async (member) => {
-
   const channel = member.guild.channels.cache.get(WELCOME_CHANNEL_ID);
   if (!channel) return;
 
@@ -51,8 +47,7 @@ client.on('guildMemberAdd', async (member) => {
 ✦ ʚ WELCOME ɞ ✦
 ╰┈┈┈┈୨♡୧┈┈┈┈╯
 
-  WELCOME1 ${member}
-
+¡Hola! ${member}
 Bienvenido/a a **${member.guild.name}**
 Ahora somos ✧ ${member.guild.memberCount} ✧ miembros
 
